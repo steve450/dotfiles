@@ -1,0 +1,28 @@
+#!/bin/sh
+# Install app configs
+
+if [ $OSX ]; then
+
+  APPCONFIGDIRREL=$(dirname $0)
+  cd $APPCONFIGDIRREL
+  APPCONFIGDIR=$(pwd -P)
+
+  SPECTACLECONFIGDIR="$HOME/Library/Application Support/Spectacle"
+
+  mkdir -p "$SPECTACLECONFIGDIR"
+  ln -sfv  "$APPCONFIGDIR/Shortcuts.json" "$SPECTACLECONFIGDIR/Shortcuts.json"
+
+  defaults write com.divisiblebyzero.Spectacle \
+    BackgroundAlertSuppressed \
+    -int 1
+  defaults write com.divisiblebyzero.Spectacle \
+    SUEnableAutomaticChecks \
+    -int 1
+  defaults write com.divisiblebyzero.Spectacle \
+    SUHasLaunchedBefore \
+    -int 1
+  defaults write com.divisiblebyzero.Spectacle \
+    StatusItemEnabled \
+    -int 0
+    
+fi
